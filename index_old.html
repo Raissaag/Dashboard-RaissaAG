@@ -98,54 +98,6 @@
             height: 22px;
         }
 
-        .btn-guest {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            background: linear-gradient(135deg, #ec4899, #db2777);
-            color: #fff;
-            border: none;
-            border-radius: 50px;
-            padding: 1rem 2rem;
-            font-size: 1rem;
-            font-weight: 600;
-            font-family: 'Outfit', sans-serif;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 0.9rem;
-            letter-spacing: 0.5px;
-            box-shadow: 0 0 25px rgba(236, 72, 153, 0.2);
-        }
-
-        .btn-guest:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 0 45px rgba(236, 72, 153, 0.45);
-        }
-
-        .login-actions {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0;
-        }
-
-        /* DEMO BADGE */
-        .demo-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            background: rgba(168, 85, 247, 0.15);
-            border: 1px solid rgba(168, 85, 247, 0.4);
-            color: #c084fc;
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            padding: 0.3rem 0.9rem;
-            border-radius: 20px;
-            margin-bottom: 0.5rem;
-        }
-
         /* ── DASHBOARD ── */
         #dashboard {
             display: none;
@@ -538,25 +490,6 @@
             }
         }
 
-        /* FINANCE ROW */
-        .finance-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0.8rem;
-            margin-top: 0.8rem;
-            animation: fadeInUp 0.8s ease-out 0.3s backwards;
-        }
-
-        .finance-row .info-card {
-            padding: 0.6rem 0.9rem;
-        }
-
-        .finance-value {
-            font-size: 1.4rem;
-            font-weight: 700;
-            line-height: 1.1;
-        }
-
         /* Responsive */
         @media (max-width: 768px) {
             body {
@@ -574,10 +507,6 @@
             .dashboard-grid {
                 grid-template-columns: 1fr;
             }
-
-            .finance-row {
-                grid-template-columns: 1fr;
-            }
         }
     </style>
 </head>
@@ -590,25 +519,19 @@
             <div class="date" id="data-login">Carregando data...</div>
             <h1 id="saudacao">Bom dia, Raíssa! 🌸</h1>
             <p>Conecte sua conta Google para ver seus emails, reuniões e tarefas do dia em um só lugar.</p>
-            <div class="login-actions">
-                <button class="btn-google" id="btn-login" onclick="handleLogin()">
-                    <!-- Google logo SVG -->
-                    <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                        <path fill="#fff"
-                            d="M44.5 20H24v8.5h11.7C34.3 33.6 29.7 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 6 1.1 8.2 3l6-6C34.5 5.1 29.5 3 24 3 12.4 3 3 12.4 3 24s9.4 21 21 21c10.9 0 20.4-7.9 20.4-21 0-1.4-.1-2.7-.4-4z" />
-                    </svg>
-                    Entrar com Google
-                </button>
-                <button class="btn-guest" id="btn-demo" onclick="showDemoMode()">
-                    👀 Não sou Raíssa — ver demonstração
-                </button>
-            </div>
+            <button class="btn-google" id="btn-login" onclick="handleLogin()">
+                <!-- Google logo SVG -->
+                <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="#fff"
+                        d="M44.5 20H24v8.5h11.7C34.3 33.6 29.7 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 6 1.1 8.2 3l6-6C34.5 5.1 29.5 3 24 3 12.4 3 3 12.4 3 24s9.4 21 21 21c10.9 0 20.4-7.9 20.4-21 0-1.4-.1-2.7-.4-4z" />
+                </svg>
+                Entrar com Google
+            </button>
         </section>
 
         <!-- ── DASHBOARD ── -->
         <div id="dashboard">
             <div class="user-bar" id="user-bar">
-                <span id="demo-badge-slot"></span>
                 <img id="user-avatar" src="" alt="avatar">
                 <span id="user-name"></span>
                 <button class="btn-logout" onclick="handleLogout()">Sair</button>
@@ -617,17 +540,17 @@
             <header>
                 <div class="date" id="data-hoje">Carregando data...</div>
                 <h1>Por onde começo hoje?</h1>
-                <div class="subtitle" id="dashboard-subtitle">Vamos! Você consegue, Raíssa! (<span class="pink">PinkPill</span>)</div>
+                <div class="subtitle">Vamos! Você consegue, Raíssa! (<span class="pink">PinkPill</span>)</div>
             </header>
 
             <main class="dashboard-grid">
-                <div class="card" id="card-email" onclick="openIfNotDemo('https://mail.google.com')">
+                <div class="card" onclick="window.open('https://mail.google.com','_blank')">
                     <div class="card-icon">✉️</div>
                     <div class="card-number" id="email-count"><span class="loading-pulse"></span></div>
                     <div class="card-title">Emails não lidos</div>
                 </div>
 
-                <div class="card" id="card-calendar" onclick="openIfNotDemo('https://calendar.google.com')">
+                <div class="card" onclick="window.open('https://calendar.google.com','_blank')">
                     <div class="card-icon">📅</div>
                     <div class="card-number" id="meeting-count"><span class="loading-pulse"></span></div>
                     <div class="card-title">Compromissos</div>
@@ -651,22 +574,6 @@
                 <div class="info-card" id="horoscope-card">
                     <div class="info-card-title">♉ Horóscopo de Touro – Hoje</div>
                     <div class="info-horo-text"><span class="loading-pulse"></span></div>
-                </div>
-            </div>
-
-            <!-- Cotações Financeiras -->
-            <div class="finance-row">
-                <div class="info-card" id="dollar-card">
-                    <div class="info-card-title">💵 Dólar Americano (USD/BRL)</div>
-                    <div class="info-main-row">
-                        <span class="info-emoji"><span class="loading-pulse"></span></span>
-                    </div>
-                </div>
-                <div class="info-card" id="gold-card">
-                    <div class="info-card-title">🥇 Ouro (XAU/USD – por onça troy)</div>
-                    <div class="info-main-row">
-                        <span class="info-emoji"><span class="loading-pulse"></span></span>
-                    </div>
                 </div>
             </div>
 
@@ -711,12 +618,6 @@
         let tokenClient;   // GSI token client
         let gapiReady = false;
         let chartInstance = null;
-        let demoMode = false;
-
-        /* Abre link externo apenas fora do modo demonstração */
-        function openIfNotDemo(url) {
-            if (!demoMode) window.open(url, '_blank');
-        }
 
         /* ═══════════════════════════════════════════════════════════════════════
            HELPERS
@@ -810,7 +711,6 @@
         /* ═══════════════════════════════════════════════════════════════════════
            4. DASHBOARD
         ═══════════════════════════════════════════════════════════════════════ */
-        // Data na tela de login
         // Saudação dinâmica conforme o horário
         (function () {
             const hora = new Date().getHours();
@@ -824,13 +724,9 @@
         document.getElementById('data-login').textContent = formatDate(new Date());
 
         function showDashboard(user) {
-            demoMode = false;
             document.getElementById('login-screen').style.display = 'none';
             document.getElementById('dashboard').style.display = 'block';
             document.getElementById('data-hoje').textContent = formatDate(new Date());
-            document.getElementById('demo-badge-slot').innerHTML = '';
-            document.getElementById('dashboard-subtitle').innerHTML =
-                'Vamos! Você consegue, Raíssa! (<span class="pink">PinkPill</span>)';
 
             if (user) {
                 document.getElementById('user-name').textContent = user.name || '';
@@ -848,166 +744,10 @@
             loadCoelhoMsgs();
             loadWeather();
             loadHoroscope();
-            loadFinanceData();
         }
 
         /* ═══════════════════════════════════════════════════════════════════════
-           MODO DEMONSTRAÇÃO – dados estáticos (foto do último acesso de Raíssa)
-        ═══════════════════════════════════════════════════════════════════════ */
-        function showDemoMode() {
-            demoMode = true;
-            document.getElementById('login-screen').style.display = 'none';
-            document.getElementById('dashboard').style.display = 'block';
-            document.getElementById('data-hoje').textContent = formatDate(new Date());
-
-            // Cursor padrão nos cards que têm onclick
-            ['card-email', 'card-calendar'].forEach(id => {
-                const el = document.getElementById(id);
-                if (el) el.style.cursor = 'default';
-            });
-
-            // Badge de demonstração
-            document.getElementById('demo-badge-slot').innerHTML =
-                '<span class="demo-badge">🎭 Modo Demonstração</span>';
-
-            // Oculta avatar, mostra nome de visitante
-            document.getElementById('user-avatar').style.display = 'none';
-            document.getElementById('user-name').textContent = 'Amiga da Raíssa';
-
-            // Subtitle personalizado
-            document.getElementById('dashboard-subtitle').innerHTML =
-                'Bem-vinda ao dashboard da Raíssa! (<span class="pink">PinkPill</span>)';
-
-            // ── Dados estáticos (snapshot do último acesso) ──────────────────
-            document.getElementById('email-count').textContent   = '7';
-            document.getElementById('meeting-count').textContent = '3';
-            document.getElementById('coelho-count').textContent  = '42';
-
-            // ── Agenda estática ──────────────────────────────────────────────
-            const container = document.getElementById('events-list');
-            const today = new Date();
-            const dow = today.getDay();
-            const diffToMon = dow === 0 ? -6 : 1 - dow;
-            const monday = new Date(today);
-            monday.setDate(today.getDate() + diffToMon);
-
-            const DIAS = ['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'];
-            const staticEvents = [
-                { offset: 0, time: '09:00', name: 'Daily – Squad Produto' },
-                { offset: 0, time: '14:00', name: 'Revisão de Sprint' },
-                { offset: 0, time: '16:30', name: 'Mentoria Programaria' },
-                { offset: 1, time: '10:00', name: 'Alinhamento com time de Design' },
-                { offset: 1, time: '15:00', name: '1:1 com liderança' },
-                { offset: 2, time: '09:30', name: 'Workshop de UX Writing' },
-                { offset: 3, time: '11:00', name: 'Apresentação de resultados' },
-                { offset: 4, time: '09:00', name: 'Daily – Squad Produto' },
-                { offset: 4, time: '17:00', name: 'Happy Hour do time 🎉' },
-            ];
-
-            const todayKey = localKey(today);
-            const grupos = {};
-            staticEvents.forEach(ev => {
-                const d = new Date(monday);
-                d.setDate(monday.getDate() + ev.offset);
-                const key = localKey(d);
-                if (!grupos[key]) grupos[key] = { date: d, items: [] };
-                grupos[key].items.push(ev);
-            });
-
-            container.innerHTML = Object.keys(grupos).sort().map(key => {
-                const { date, items } = grupos[key];
-                const isToday = key === todayKey;
-                const dayName = DIAS[date.getDay()];
-                const dateStr = date.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
-                const labelClass = isToday ? 'week-day-label today' : 'week-day-label';
-                const labelText = isToday ? `${dayName} (hoje) · ${dateStr}` : `${dayName} · ${dateStr}`;
-                const evHtml = items.map(ev =>
-                    `<div class="event-item">
-                        <span class="event-time">${ev.time}</span>
-                        <span class="event-name">${ev.name}</span>
-                    </div>`
-                ).join('');
-                return `<div class="week-day-group">
-                    <div class="week-day-header">
-                        <span class="${labelClass}">${labelText}</span><hr>
-                    </div>
-                    <div class="events-list">${evHtml}</div>
-                </div>`;
-            }).join('');
-
-            // ── Gráfico estático (últimos 7 dias) ────────────────────────────
-            const DIAS_ABREV = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
-            const chartLabels = [];
-            for (let i = 6; i >= 0; i--) {
-                const d = new Date();
-                d.setDate(d.getDate() - i);
-                const nome = DIAS_ABREV[d.getDay()];
-                const dateFmt = d.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
-                chartLabels.push(`${nome} ${dateFmt}`);
-            }
-            renderChart(chartLabels, [14, 9, 21, 6, 18, 11, 7]);
-
-            // ── APIs que não precisam de Google (continuam ao vivo) ──────────
-            loadWeather();
-            loadHoroscope();
-            loadFinanceData();
-        }
-
-        /* ═══════════════════════════════════════════════════════════════════════
-           5d. COTAÇÕES – Dólar (USD/BRL) e Ouro (XAU/USD) via AwesomeAPI
-        ═══════════════════════════════════════════════════════════════════════ */
-        async function loadFinanceData() {
-            const dollarCard = document.getElementById('dollar-card');
-            const goldCard   = document.getElementById('gold-card');
-
-            function changeInfo(pct) {
-                const n = parseFloat(pct);
-                const cls    = n > 0 ? 'up' : n < 0 ? 'down' : 'flat';
-                const arrow  = n > 0 ? '▲' : n < 0 ? '▼' : '–';
-                const label  = n > 0 ? 'Alta' : n < 0 ? 'Baixa' : 'Estável';
-                return { cls, arrow, label, abs: Math.abs(n).toFixed(2) };
-            }
-
-            try {
-                const data = await fetch(
-                    'https://economia.awesomeapi.com.br/json/last/USD-BRL,XAU-USD'
-                ).then(r => r.json());
-
-                /* ── Dólar ── */
-                const usd = data.USDBRL;
-                const usdBid  = parseFloat(usd.bid).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-                const usdHigh = parseFloat(usd.high).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-                const usdLow  = parseFloat(usd.low).toLocaleString('pt-BR',  { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-                const usdC    = changeInfo(usd.pctChange);
-
-                dollarCard.innerHTML = `
-                    <div class="info-card-title">💵 Dólar Americano</div>
-                    <div class="info-main-row">
-                        <span class="info-emoji">💵</span>
-                        <div class="finance-value">R$ ${usdBid}</div>
-                    </div>`;
-
-                /* ── Ouro ── */
-                const xau = data.XAUUSD;
-                const xauBid = parseFloat(xau.bid).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-
-                goldCard.innerHTML = `
-                    <div class="info-card-title">🥇 Ouro (por onça troy)</div>
-                    <div class="info-main-row">
-                        <span class="info-emoji">🥇</span>
-                        <div class="finance-value">US$ ${xauBid}</div>
-                    </div>`;
-
-            } catch (err) {
-                console.error('Finance:', err);
-                dollarCard.innerHTML = `<div class="info-card-title">💵 Dólar Americano</div><p class="event-empty">⚠️ Cotação indisponível</p>`;
-                goldCard.innerHTML   = `<div class="info-card-title">🥇 Ouro</div><p class="event-empty">⚠️ Cotação indisponível</p>`;
-            }
-        }
-
-
-        /* ═══════════════════════════════════════════════════════════════════════
-           5b. CLIMA – Open-Meteo fixado em Santos, SP
+           5. CLIMA – Open-Meteo fixado em Santos, SP
         ═══════════════════════════════════════════════════════════════════════ */
         function wmoInfo(code) {
             if (code === 0) return { emoji: '☀️', desc: 'Céu limpo' };
@@ -1051,7 +791,7 @@
         }
 
         /* ═══════════════════════════════════════════════════════════════════════
-           5c. PREVISÃO ASTROLÓGICA – 3 APIs em cadeia + tradução MyMemory
+           6. PREVISÃO ASTROLÓGICA – 3 APIs em cadeia + tradução MyMemory
         ═══════════════════════════════════════════════════════════════════════ */
         async function loadHoroscope() {
             const card = document.getElementById('horoscope-card');
@@ -1119,10 +859,8 @@
                 <p class="info-horo-text">${previsoes[diaDoAno % previsoes.length]}</p>`;
             }
         }
-
-
         /* ═══════════════════════════════════════════════════════════════════════
-           5. GMAIL – via gapi.client.gmail
+           7. GMAIL – via gapi.client.gmail
         ═══════════════════════════════════════════════════════════════════════ */
         /* Conta TODOS os resultados de uma query paginando até o fim */
         async function countExact(query, labelIds) {
@@ -1175,7 +913,7 @@
         }
 
         /* ═══════════════════════════════════════════════════════════════════════
-           6. GOOGLE CALENDAR – via gapi.client.calendar
+           8. GOOGLE CALENDAR – via gapi.client.calendar
         ═══════════════════════════════════════════════════════════════════════ */
         async function loadCalendarEvents() {
             setLoading('meeting-count');
@@ -1267,12 +1005,8 @@
         }
 
         /* ═══════════════════════════════════════════════════════════════════════
-           7. GRÁFICO – total EXATO de emails na caixa de entrada por dia
-              (últimos 7 dias incluindo hoje)
+           9. GRÁFICO – total exato de emails na caixa de entrada (últimos 7 dias)
         ═══════════════════════════════════════════════════════════════════════ */
-
-        /* Conta exatamente quantas mensagens existem em INBOX num intervalo,
-           paginando de 500 em 500 até acabar os resultados */
         async function countInboxDay(afterTs, beforeTs) {
             let count = 0;
             let pageToken;
@@ -1322,7 +1056,7 @@
         }
 
         /* ═══════════════════════════════════════════════════════════════════════
-           8. CHART.JS
+           10. CHART.JS – renderização
         ═══════════════════════════════════════════════════════════════════════ */
         function renderChart(labels, data) {
             const ctx = document.getElementById('emailChart').getContext('2d');
